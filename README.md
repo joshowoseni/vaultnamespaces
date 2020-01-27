@@ -36,7 +36,9 @@ $ vault policy write -namespace=security/digital digital-admin digital-admin.hcl
 # Step 3: Setup entities and groups
 
 `First, you need to enable userpass auth method`
-$ vault auth enable -namespace=security userpass
+{code}
+$vault auth enable -namespace=security userpass
+{code}
 
 `Create a user 'bob'`
 $ vault write -namespace=security auth/userpass/users/bob password="welcome1"
