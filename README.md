@@ -41,7 +41,8 @@ $ curl --header "X-Vault-Token: <TOKEN>" \
 ```
 
 
-### Step 2: Write Policy; There is org-level admin for security org and team-level admin for both digital and operations
+### Step 2: Write Policy; In this case, create policy for org-level admin and team-level admin for both security and cloudsecurity respectively.
+
 - ### CLI Command
 Create policy for both org-level admin and team-level admin
 - create sec-admin.hcl
@@ -85,10 +86,10 @@ $ curl --header "X-Vault-Token: <Token>" \
 
 ### Step 3: Setup entities and groups
 -   ### CLI Command
-First, you need to enable userpass auth method
+First, enable userpass auth method
 - `$vault auth enable -namespace=security userpass`
 
-Then create a user `bob` with permission
+Create a user `bob` with permission
 - `$ vault write -namespace=security auth/userpass/users/bob password="welcome1"`
 
 Create an entity for Bob Smith with 'edu-admin' policy attached & Save the generated entity ID in entity_id.txt file
