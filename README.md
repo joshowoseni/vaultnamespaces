@@ -87,24 +87,24 @@ $ curl --header "X-Vault-Token: <Token>" \
 ### Step 3: Setup entities and groups
 -   ### CLI Command
 First, you need to enable userpass auth method
-`$vault auth enable -namespace=security userpass`
+- `$vault auth enable -namespace=security userpass`
 
 Then create a user `bob` with permission
-`$ vault write -namespace=security auth/userpass/users/bob password="welcome1"`
+- `$ vault write -namespace=security auth/userpass/users/bob password="welcome1"`
 
 Create an entity for Bob Smith with 'edu-admin' policy attached & Save the generated entity ID in entity_id.txt file
-`$ vault write -namespace=security -format=json identity/entity name="Bob Smith" policies="sec-admin"`
-`$ touch entity_id.txt; copy value of '.data_id'`
+- `$ vault write -namespace=security -format=json identity/entity name="Bob Smith" policies="sec-admin"`
+- `$ touch entity_id.txt; copy value of '.data_id'`
 
 Get the mount accessor for userpass auth method and save it in accessor.txt file
-`$ vault auth list -namespace=security -format=json`
-`touch accessor.txt; add vaule of '.["userpass/"].accessor'`
+- `$ vault auth list -namespace=security -format=json`
+- `touch accessor.txt; add vaule of '.["userpass/"].accessor'`
 
 Create an entity alias for Bob Smith to attach 'bob'
-`$ vault write -namespace=security identity/entity-alias name="bob" canonical_id=$(cat entity_id.txt) mount_accessor=$(cat accessor.txt)`
+- `$ vault write -namespace=security identity/entity-alias name="bob" canonical_id=$(cat entity_id.txt) mount_accessor=$(cat accessor.txt)`
 
 Create a group, "digital Admin" in security/digital namespace with Bob Smith entity as its member
-`$ vault write -namespace=security/digital identity/group name="digital Admin" policies="digital-admin" member_entity_ids=$(cat entity_id.txt)`
+- `$ vault write -namespace=security/digital identity/group name="digital Admin" policies="digital-admin" member_entity_ids=$(cat entity_id.txt)`
 
 
 ### Step 4: Test the Bob Smith entity
