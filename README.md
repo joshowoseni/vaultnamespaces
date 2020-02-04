@@ -9,10 +9,9 @@ Each namespace can have its own:
 - Identity entities and groups
 
 ### Environment prep. We would be using root
-* `Login to Vault as root`
-* `export VAULT_ADDR=http://<IPADDRESS>`
-* `vault login root <Token>`
-
+Login to Vault as root using the root token
+* `export VAULT_ADDR=http://<IPADDRESS>:8200`
+* `vault login <Token>`
 
 ### Step 1: Create namespaces
 *  ### CLI Command
