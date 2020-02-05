@@ -180,7 +180,7 @@ $ curl --header "X-Vault-Token: s.THNIRijGjnLeL25vcFv5NNon.1Vi61" \
        http://127.0.0.1:8200/v1/security/sys/mounts/sec-secret
 ```
 
-To test bob can perform task in digital namespace
+To test bob can perform task in cloudsecurity namespace
 - ### CLI Command
 Set the target namespace as an env variable
 - `$ export VAULT_NAMESPACE="security/cloudsecurity"`
