@@ -147,7 +147,7 @@ Below is the response. Note the generated bob token
 ```
 - ### CLI Command
 Set the target namespace as an env variable`
-`$ export VAULT_NAMESPACE="security"`
+- `$ export VAULT_NAMESPACE="security"`
 
 Create a new namespace called 'web-app'
 ```
@@ -162,7 +162,7 @@ Success! Enabled the kv-v2 secrets engine at: sec-secret/
 ```
 
 Ensure you unset VAULT_NAMESPACE variable once testing is done
-`$ unset VAULT_NAMESPACE`
+- `$ unset VAULT_NAMESPACE`
 
 - ### API Calls using cURL
 Create a new namespace called 'web-app'
@@ -181,7 +181,7 @@ $ curl --header "X-Vault-Token: s.THNIRijGjnLeL25vcFv5NNon.1Vi61" \
 
 To test bob can perform task in digital namespace
 Set the target namespace as an env variable
-`$ export VAULT_NAMESPACE="security/cloudsecurity"`
+- `$ export VAULT_NAMESPACE="security/cloudsecurity"`
 
 Create a new namespace called 'developers'
 ```
@@ -200,16 +200,15 @@ $ vault secrets enable -path=team-secret -version=1 kv
 Success! Enabled the kv secrets engine at: team-secret/
 ```
 
-`$ unset VAULT_NAMESPACE`
+- `$ unset VAULT_NAMESPACE`
 
 - ### API Call using cURL
 
-Create a new namespace called 'web-app'
+Create a new namespace called 'developers'
 ```
-# Create a new namespace called 'vault-training'
 $ curl --header "X-Vault-Token: <bob's_token>" \
        --request POST \
-       http://127.0.0.1:8200/v1/education/cloudsecurity/sys/namespaces/web-app
+       http://127.0.0.1:8200/v1/education/cloudsecurity/sys/namespaces/developers
 
 # Enable key/value v1 secrets engine at team-secret
 $ curl --header "X-Vault-Token: <bob's_token>" \
