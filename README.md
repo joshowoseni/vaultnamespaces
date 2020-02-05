@@ -15,8 +15,8 @@ Login to Vault as root using the root token
 
 ### Step 1: Create namespaces
 *  ### CLI Command
-`$ vault namespace create security`
-`$ vault namespace create -namespace=security digital`
+- `$ vault namespace create security`
+- `$ vault namespace create -namespace=security digital`
 
 ```
 $ vault namespace list
@@ -48,8 +48,8 @@ Create policy for both org-level admin and team-level admin
 - create sec-admin.hcl
 - create cloudsec-admin.hcl
 
-`$ vault policy write -namespace=security sec-admin sec-admin.hcl`
-`$ vault policy write -namespace=security/cloudsecurity cloudsec-admin cloudsec-admin.hcl`
+- `$ vault policy write -namespace=security sec-admin sec-admin.hcl`
+- `$ vault policy write -namespace=security/cloudsecurity cloudsec-admin cloudsec-admin.hcl`
 
 - ### API call using cURL
 
@@ -60,23 +60,26 @@ $ tee sec-payload.json <<EOF
   "policy": "path \"sys/namespaces/security/*\" {\n  capabilities = [\"create\", \"read\", \"update\", \"delete\", \"list\", \"sudo\"]\n } ... "
 }
 EOF
-
-# Create edu-admin policy under 'security' namespace
+```
+Create edu-admin policy under 'security' namespace
+```
 $ curl --header "X-Vault-Token: <Token>" \
        --header "X-Vault-Namespace: security" \
        --request PUT \
        --data @sec-payload.json \
        https://127.0.0.1:8200/v1/sys/policies/acl/sec-admin
-
-# Create a request payload
+```
+Create a request payload
+```
 $ tee cloudsec-payload.json <<EOF
 {
  "policy": "path \"sys/namespaces/security/cloudsecurity/*\" {\n  capabilities = [\"create\", \"read\", \"update\", \"delete\", \"list\", \"sudo\"]\n  }  ... "
 }
 EOF
+```
 
-# Create cloudsec-admin policy under 'security/cloudsecurity' namespace
-# This example directs the target namespace in the API endpoint
+Create cloudsec-admin policy under 'security/cloudsecurity' namespace
+```
 $ curl --header "X-Vault-Token: <Token>" \
        --request PUT \
        --data @cloudsec-payload.json \
