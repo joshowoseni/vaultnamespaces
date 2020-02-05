@@ -108,49 +108,8 @@ Create a group, "digital Admin" in security/digital namespace with Bob Smith ent
 
 
 ### Step 4: Test the Bob Smith entity
-
+- ### CLI Command
 `$ vault login -namespace=security -method=userpass username="bob" password="welcome1"`
-
-Set the target namespace as an env variable`
-`$ export VAULT_NAMESPACE="security"`
-
-Create a new namespace called 'web-app'
-```
-$ vault namespace create web-app
-Success! Namespace created at: security/web-app/
-```
-
-Enable key/value v2 secrets engine at edu-secret
-```
-$ vault secrets enable -path=sec-secret kv-v2
-Success! Enabled the kv-v2 secrets engine at: sec-secret/
-```
-
-Ensure you unset VAULT_NAMESPACE variable once testing is done
-`$ unset VAULT_NAMESPACE`
-
-To test bob can perform task in digital namespace
-Set the target namespace as an env variable
-`$ export VAULT_NAMESPACE="security/digital"`
-
-Create a new namespace called 'vault-digital'
-```
-$ vault namespace create vault-digital`
-
-Key     Value
----     -----
-id      nQjeG
-path    security/digital/vault-digital/
-```
-
-
-Enable key/value v1 secrets digine at team-secret
-```
-$ vault secrets enable -path=team-secret -version=1 kv
-Success! Enabled the kv secrets engine at: team-secret/
-```
-
-`$ unset VAULT_NAMESPACE`
 
 - ### API Call using cURL
 Login as bob
@@ -186,10 +145,29 @@ Below is the response. Note the generated bob token
   }
 }
 ```
+- ### CLI Command
+Set the target namespace as an env variable`
+`$ export VAULT_NAMESPACE="security"`
 
 Create a new namespace called 'web-app'
 ```
-# Be sure to use generated bob's client token
+$ vault namespace create web-app
+Success! Namespace created at: security/web-app/
+```
+
+Enable key/value v2 secrets engine at edu-secret
+```
+$ vault secrets enable -path=sec-secret kv-v2
+Success! Enabled the kv-v2 secrets engine at: sec-secret/
+```
+
+Ensure you unset VAULT_NAMESPACE variable once testing is done
+`$ unset VAULT_NAMESPACE`
+
+- ### API Calls using cURL
+Create a new namespace called 'web-app'
+Be sure to use generated bob's client token
+```
 $ curl --header "X-Vault-Token: s.THNIRijGjnLeL25vcFv5NNon.1Vi61" \
        --request POST \
        http://127.0.0.1:8200/v1/security/sys/namespaces/web-app
@@ -199,4 +177,43 @@ $ curl --header "X-Vault-Token: s.THNIRijGjnLeL25vcFv5NNon.1Vi61" \
        --request POST \
        --data '{"type": "kv-v2"}' \
        http://127.0.0.1:8200/v1/security/sys/mounts/sec-secret
+```
+
+To test bob can perform task in digital namespace
+Set the target namespace as an env variable
+`$ export VAULT_NAMESPACE="security/cloudsecurity"`
+
+Create a new namespace called 'developers'
+```
+$ vault namespace create developers`
+
+Key     Value
+---     -----
+id      nQjeG
+path    security/cloudsecurity/developers/
+```
+
+
+Enable key/value v1 secrets digine at team-secret
+```
+$ vault secrets enable -path=team-secret -version=1 kv
+Success! Enabled the kv secrets engine at: team-secret/
+```
+
+`$ unset VAULT_NAMESPACE`
+
+- ### API Call using cURL
+
+Create a new namespace called 'web-app'
+```
+# Create a new namespace called 'vault-training'
+$ curl --header "X-Vault-Token: <bob's_token>" \
+       --request POST \
+       http://127.0.0.1:8200/v1/education/cloudsecurity/sys/namespaces/web-app
+
+# Enable key/value v1 secrets engine at team-secret
+$ curl --header "X-Vault-Token: <bob's_token>" \
+       --request POST \
+       --data '{"type": "kv"}' \
+       http://127.0.0.1:8200/v1/education/cloudsecurity/sys/mounts/cloudsec-secret
 ```
