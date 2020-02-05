@@ -16,7 +16,7 @@ Login to Vault as root using the root token
 ### Step 1: Create namespaces
 *  ### CLI Command
 - `$ vault namespace create security`
-- `$ vault namespace create -namespace=security digital`
+- `$ vault namespace create -namespace=security cloudsecurity`
 
 ```
 $ vault namespace list
@@ -106,8 +106,8 @@ Get the mount accessor for userpass auth method and save it in accessor.txt file
 Create an entity alias for Bob Smith to attach 'bob'
 - `$ vault write -namespace=security identity/entity-alias name="bob" canonical_id=$(cat entity_id.txt) mount_accessor=$(cat accessor.txt)`
 
-Create a group, "digital Admin" in security/digital namespace with Bob Smith entity as its member
-- `$ vault write -namespace=security/digital identity/group name="digital Admin" policies="digital-admin" member_entity_ids=$(cat entity_id.txt)`
+Create a group, "cloudsecurity Admin" in security/cloudsecurity namespace with Bob Smith entity as its member
+- `$ vault write -namespace=security/cloudsecurity identity/group name="cloudsecurity Admin" policies="cloudsec-admin" member_entity_ids=$(cat entity_id.txt)`
 
 
 ### Step 4: Test the Bob Smith entity
